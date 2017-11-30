@@ -1,4 +1,4 @@
-# ObservatoireDesTaux
+# Observatoire des Taux
 
 Application pour Android reprenant l'observatoire des taux du site du gipilab
 
