@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Observatoire des taux</string>
+
+    <string name="presentation">Présentation</string>
+    <string name="jauges_de_pression_conjoncturelle">Jauges de pression conjoncturelle</string>
+    <string name="theorie_gfm">Théorie GFM</string>
+    <string name="taux_variables">Taux variables</string>
+    <string name="taux_fixes">Taux fixes</string>
+    <string name="site_address">https://gipilab.org</string>
+    <string name="editorPrefLastUrlKey">lastURL</string>
+    <string name="courbe_des_taux">Courbe des taux \u2192</string>
+    <string name="historique_des_taux">Historique des taux \u2192</string>
+    <string name="pression_conjoncturelle">Pression conjoncturelle \u2192</string>
+    <string name="volatilit_des_taux">Volatilité des taux \u2192</string>
+    <string name="licence_et_code_source">Licence et code source</string>
+
+</resources>

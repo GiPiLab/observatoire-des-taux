@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/buttonPresentation"
+        android:title="@string/presentation" />
+
+
+    <item
+        android:id="@+id/buttonGFM"
+        android:title="@string/theorie_gfm" />
+
+    <item
+        android:id="@+id/subMenuPressionConjoncturelle"
+        android:title="@string/pression_conjoncturelle" />
+    <group
+        android:id="@+id/groupPression"
+        android:visible="false">
+        <item
+            android:id="@+id/buttonPressionConjoncturelleTauxVariables"
+            android:title="@string/taux_variables" />
+
+        <item
+            android:id="@+id/buttonPressionConjoncturelleTauxFixes"
+            android:title="@string/taux_fixes" />
+
+        <item
+            android:id="@+id/buttonJauges"
+            android:title="@string/jauges_de_pression_conjoncturelle" />
+
+    </group>
+
+    <item
+        android:id="@+id/subMenuVolatilite"
+        android:title="@string/volatilit_des_taux" />
+    <group
+        android:id="@+id/groupVolatilite"
+        android:visible="false">
+        <item
+            android:id="@+id/buttonVolatiliteTauxVariables"
+            android:title="@string/taux_variables" />
+
+        <item
+            android:id="@+id/buttonVolatiliteTauxFixes"
+            android:title="@string/taux_fixes" />
+    </group>
+
+
+    <item
+        android:id="@+id/subMenuCourbesDesTaux"
+        android:title="@string/courbe_des_taux" />
+
+    <group
+        android:id="@+id/groupCourbesDesTaux"
+        android:visible="false">
+        <item
+            android:id="@+id/buttonCourbesDesTauxVariables"
+            android:title="@string/taux_variables" />
+
+        <item
+            android:id="@+id/buttonCourbesDesTauxFixes"
+            android:title="@string/taux_fixes" />
+    </group>
+
+
+    <item
+        android:id="@+id/subMenuHistorique"
+        android:title="@string/historique_des_taux" />
+    <group
+        android:id="@+id/groupHistorique"
+        android:visible="false">
+        <item
+            android:id="@+id/buttonHistoriqueTauxVariables"
+            android:title="@string/taux_variables" />
+
+        <item
+            android:id="@+id/buttonHistoriqueTauxFixes"
+            android:title="@string/taux_fixes" />
+    </group>
+
+
+    <item
+        android:id="@+id/menuLicence"
+        android:title="@string/licence_et_code_source" />
+
+
+</menu>
+
+
+
+
+
