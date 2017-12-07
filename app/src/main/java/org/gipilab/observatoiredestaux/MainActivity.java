@@ -49,7 +49,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -69,9 +68,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity
@@ -162,18 +158,8 @@ public class MainActivity extends AppCompatActivity
 
 
         if (firstRun) {
-            final Handler handler = new Handler();
-            Timer t = new Timer();
-            t.schedule(new TimerTask() {
-                public void run() {
-                    handler.post(new Runnable() {
-                        public void run() {
-                            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-                            drawer.openDrawer(GravityCompat.START);
-                        }
-                    });
-                }
-            }, R.integer.toastExitDuration);
+            DrawerLayout drawer = findViewById(R.id.drawer_layout);
+            drawer.openDrawer(GravityCompat.START);
 
             SharedPreferences.Editor editor = mSettings.edit();
             editor.putBoolean("firstRun", false);
