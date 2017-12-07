@@ -1,0 +1,14 @@
+Options -Indexes
+
+<IfModule mod_expires.c>
+ExpiresActive on
+ExpiresDefault "access plus 1 day"
+</IfModule>
+
+
+
+<IfModule mod_headers.c>
+<Files ~ "pages.sqlite3">
+deny from all
+</Files>
+</IfModule>
