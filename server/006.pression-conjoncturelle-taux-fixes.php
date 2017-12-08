@@ -101,7 +101,7 @@ $(document).ready(function(){
 	},
 
 	tooltip:{
-         formatter:function(){return "<b>"+this.series.name+"</b><br />Jauge du "+this.series.options.laDate+"<br />"}
+         formatter:function(){if(this.series.options.currentVal!=this.y)return false; else return "<b>"+this.series.name+"</b><br />Jauge du "+this.series.options.laDate+"<br />"}
 	},
 
 
@@ -126,27 +126,32 @@ $(document).ready(function(){
 	{
 		name:"TEC-10",
 		data:[[0,data["tecs"]["tec10"]["min"]],[0,data["tecs"]["tec10"]["max"]],{x:0,y:data["tecs"]["tec10"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["tecs"]["date"]
+		laDate:data["tecs"]["date"],
+		currentVal:data["tecs"]["tec10"]["current"]		
 	    },
 	{
 		name:"TEC-15",
 		data:[[1,data["tecs"]["tec15"]["min"]],[1,data["tecs"]["tec15"]["max"]],{x:1,y:data["tecs"]["tec15"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["tecs"]["date"]
+		laDate:data["tecs"]["date"],
+		currentVal:data["tecs"]["tec15"]["current"]		
 		},
 	{
 		name:"TEC-20",
 		data:[[2,data["tecs"]["tec20"]["min"]],[2,data["tecs"]["tec20"]["max"]],{x:2,y:data["tecs"]["tec20"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["tecs"]["date"]
+		laDate:data["tecs"]["date"],
+		currentVal:data["tecs"]["tec20"]["current"]		
 		},
 	{
 		name:"TEC-25",
 		data:[[3,data["tecs"]["tec25"]["min"]],[3,data["tecs"]["tec25"]["max"]],{x:3,y:data["tecs"]["tec25"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["tecs"]["date"]
+		laDate:data["tecs"]["date"],
+		currentVal:data["tecs"]["tec25"]["current"]		
 		},
 	{
 		name:"TEC-30",
 		data:[[4,data["tecs"]["tec30"]["min"]],[4,data["tecs"]["tec30"]["max"]],{x:4,y:data["tecs"]["tec30"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["tecs"]["date"]
+		laDate:data["tecs"]["date"],
+		currentVal:data["tecs"]["tec30"]["current"]		
 		}
 		] 
 	});

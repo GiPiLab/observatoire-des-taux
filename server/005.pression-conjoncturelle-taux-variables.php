@@ -100,7 +100,7 @@ $(document).ready(function(){
 	},
 
 	tooltip:{
-         formatter:function(){return "<b>"+this.series.name+"</b><br />Jauge du "+this.series.options.laDate+"<br />"}
+         formatter:function(){if(this.series.options.currentVal!=this.y)return false; else return "<b>"+this.series.name+"</b><br />Jauge du "+this.series.options.laDate+"<br />"}
 	},
 
 	plotOptions: {
@@ -123,28 +123,34 @@ $(document).ready(function(){
 	{
 		name:"Eonia",
 		data:[[0,data["eonia"]["min"]],[0,data["eonia"]["max"]],{x:0,y:data["eonia"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["eonia"]["date"]
+		laDate:data["eonia"]["date"],
+		currentVal:data["eonia"]["current"]		
+
 	    },
 
 	{
 		name:"Euribor 1 mois",
 		data:[[1,data["euribors"]["unMois"]["min"]],[1,data["euribors"]["unMois"]["max"]],{x:1,y:data["euribors"]["unMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"]
+		laDate:data["euribors"]["date"],
+		currentVal:data["euribors"]["unMois"]["current"]		
 		},
 	{
 		name:"Euribor 3 mois",
 		data:[[2,data["euribors"]["troisMois"]["min"]],[2,data["euribors"]["troisMois"]["max"]],{x:2,y:data["euribors"]["troisMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"]
+		laDate:data["euribors"]["date"],
+		currentVal:data["euribors"]["troisMois"]["current"]		
 		},
 	{
 		name:"Euribor 6 mois",
 		data:[[3,data["euribors"]["sixMois"]["min"]],[3,data["euribors"]["sixMois"]["max"]],{x:3,y:data["euribors"]["sixMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"]
+		laDate:data["euribors"]["date"],
+		currentVal:data["euribors"]["sixMois"]["current"]		
 		},
 	{
 		name:"Euribor 12 mois",
 		data:[[4,data["euribors"]["douzeMois"]["min"]],[4,data["euribors"]["douzeMois"]["max"]],{x:4,y:data["euribors"]["douzeMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"]
+		laDate:data["euribors"]["date"],
+		currentVal:data["euribors"]["douzeMois"]["current"]		
 		}
 		] 
 	});
