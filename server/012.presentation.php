@@ -56,7 +56,6 @@
       <p>Cette position est renforcée par la théorie dénommée «&nbsp;<b>GFM©</b>&nbsp;» présentée par le Laboratoire de Recherche pour le Développement Local sous la forme d'une démonstration graphique du risque de surcoût qu'induit la souscription d'un emprunt à taux fixe sur référence TEC ou tout autre indice.</p>
     </div>
     <div class="col l6 s12">
-      <h4>Ironie du verbe ?</h4>
       <p>Pour un emprunteur, l'unique justification d'un taux fixe, soit la garantie de stabilité face à une remontée (en cours ou hypothétique) des taux indexés, est largement débordée lorsque la conjoncture vient à tirer les taux indexés vers le bas ! Le taux fixe joue alors, en effet, un rôle inverse à celui pour lequel il a été choisi : blocage des décisions à cause de l'impact financier de l'indemnité actuarielle, surcoût des échéances, critiques du poids budgétaire de la dette...<br>
       Or, il s'avère qu'il est dans la nature même des taux indexés de monter, de descendre, puis de monter à nouveau, et ainsi de suite.</p>
       <p><strong>Il s'agit d'une oscillation, liée à divers paramètres politiques, économiques et financiers, nationaux et internationaux.</strong></p>
