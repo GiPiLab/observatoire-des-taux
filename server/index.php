@@ -226,13 +226,13 @@ input.highcharts-range-selector {
 <?php }?>
 
 <?php if($pageCourante!=7 && $pageCourante!=12){?>
-<script type="text/javascript" src="https://code.highcharts.com/stock/6.1.1/highstock.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com/stock/6.1.1/highcharts-more.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/stock/6.1.2/highstock.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/stock/6.1.2/highcharts-more.js"></script>
 <script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 <?php }?>
 
 <?php if($pageCourante==8||$pageCourante==9){?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.0.3/big.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.1.2/big.min.js"></script>
 <?php }?>
 
 
