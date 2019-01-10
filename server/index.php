@@ -226,8 +226,8 @@ input.highcharts-range-selector {
 <?php }?>
 
 <?php if($pageCourante!=7 && $pageCourante!=12){?>
-<script type="text/javascript" src="https://code.highcharts.com/stock/6.2.0/highstock.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com/stock/6.2.0/highcharts-more.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/stock/7.0.1/highstock.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/stock/7.0.1/highcharts-more.js"></script>
 <script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 <?php }?>
 

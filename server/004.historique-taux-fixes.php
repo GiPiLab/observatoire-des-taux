@@ -80,14 +80,15 @@ $(document).ready(function(){
       },
       
       rangeSelector: {
-        inputDateFormat:'%d-%m-%Y',
+        inputEnabled:false,
+        /*inputDateFormat:'%d-%m-%Y',
         inputEditDateFormat:'%d-%m-%Y',
 	inputDateParser:function(value)
 	{
 		value=value.split(/-/);
 		ladate=Date.UTC(parseInt(value[2]),parseInt(value[1])-1,parseInt(value[0]));
 		return ladate;
-	},
+	},*/
         buttons: [
           {
             type: 'month',
