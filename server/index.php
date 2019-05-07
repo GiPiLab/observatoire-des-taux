@@ -216,7 +216,7 @@ input.highcharts-range-selector {
 
 
 </style>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
 
 
@@ -226,13 +226,15 @@ input.highcharts-range-selector {
 <?php }?>
 
 <?php if($pageCourante!=7 && $pageCourante!=12){?>
-<script type="text/javascript" src="https://code.highcharts.com/stock/7.0.1/highstock.js"></script>
-<script type="text/javascript" src="https://code.highcharts.com/stock/7.0.1/highcharts-more.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.1.1/highstock.js" integrity="sha256-/anOOHhKRvKg1LS61kh8vEO0kMRXL0u6pI94UPbuUnc=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.1.1/highcharts-more.js" integrity="sha256-xj4Uzf1eHlQWNY9ZpUDkQ32R8LM0jzFp+D6GhZ7UzFQ=" crossorigin="anonymous"></script>
+
 <script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 <?php }?>
 
 <?php if($pageCourante==8||$pageCourante==9){?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.1.2/big.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/5.2.2/big.js" integrity="sha256-+QwQ0ivG2vE3INuOjW3p6vlGup1FmRSfcX+5DrDxMW4=" crossorigin="anonymous"></script>
 <?php }?>
 
 
