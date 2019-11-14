@@ -50,12 +50,12 @@ import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import com.google.android.material.navigation.NavigationView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,6 +68,8 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity
@@ -135,6 +137,8 @@ public class MainActivity extends AppCompatActivity
         settings.setBuiltInZoomControls(false);
         settings.setDisplayZoomControls(false);
 
+        webView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
+
         webView.setWebViewClient(myBrowser);
 
         webView.setWebChromeClient(new WebChromeClient() {
@@ -154,19 +158,12 @@ public class MainActivity extends AppCompatActivity
         });
 
         currentUrl = mSettings.getString(getString(R.string.editorPrefLastUrlKey), UrlTable.URLPRESENTATION);
-        boolean firstRun = mSettings.getBoolean("firstRun", true);
-
-
-        if (firstRun) {
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.openDrawer(GravityCompat.START);
-
-            SharedPreferences.Editor editor = mSettings.edit();
-            editor.putBoolean("firstRun", false);
-            editor.apply();
-        }
 
         myBrowser.myLoadUrl(webView, currentUrl);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.openDrawer(GravityCompat.START);
+
     }
 
     @Override
@@ -325,19 +322,17 @@ public class MainActivity extends AppCompatActivity
             ConnectivityManager cm =
                     (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            NetworkInfo activeNetwork = Objects.requireNonNull(cm).getActiveNetworkInfo();
             return (activeNetwork != null && activeNetwork.isConnectedOrConnecting());
         }
 
 
-        @SuppressWarnings("deprecation")
         @Override
         public boolean shouldOverrideUrlLoading(@NonNull WebView view, String url) {
             myLoadUrl(view, url);
             return true;
         }
 
-        @SuppressWarnings("deprecation")
         @Override
         public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);

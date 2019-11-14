@@ -99,7 +99,7 @@ if(!file_exists("$fileName"))
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <title><?php echo htmlentities($pageTitle); ?></title>
+  <title>Observatoire des taux</title>
   <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -188,7 +188,7 @@ h4.lexique{
 
 
 .body-uniform{
-	background-color:white;
+	background:white;
 }
 
 
@@ -216,9 +216,10 @@ input.highcharts-range-selector {
 
 
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+<script src="libs/materialize/materialize.min.js"></script>
 
 <?php if($pageCourante==7){?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
@@ -226,9 +227,9 @@ input.highcharts-range-selector {
 <?php }?>
 
 <?php if($pageCourante!=7 && $pageCourante!=12){?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.1.1/highstock.js" integrity="sha256-/anOOHhKRvKg1LS61kh8vEO0kMRXL0u6pI94UPbuUnc=" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/7.1.1/highcharts-more.js" integrity="sha256-xj4Uzf1eHlQWNY9ZpUDkQ32R8LM0jzFp+D6GhZ7UzFQ=" crossorigin="anonymous"></script>
+<script src="https://code.highcharts.com/stock/7.2/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/7.2/highcharts-more.js"></script>
 
 <script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 <?php }?>
