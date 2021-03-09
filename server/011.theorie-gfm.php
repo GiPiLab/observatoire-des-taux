@@ -63,7 +63,8 @@ $(document).ready(function(){
       },
       
       rangeSelector: {
-      	inputEnabled:false,
+      	inputEnabled:true,
+        inputDateFormat:'%d %b %Y',
         /*inputDateFormat:'%d-%m-%Y',
         inputEditDateFormat:'%d-%m-%Y',
 	inputDateParser:function(value)
@@ -150,6 +151,7 @@ $(document).ready(function(){
       
       tooltip:{
         shared:true,
+		split:false,
 		valueDecimals:3,
 		 dateTimeLabelFormats: {
                     millisecond: '%A %e %b %Y, %H:%M:%S.%L',

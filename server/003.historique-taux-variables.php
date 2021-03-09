@@ -81,8 +81,9 @@ $(document).ready(function(){
       },
       
       rangeSelector: {
-        inputEnabled:false,
-        /*inputDateFormat:'%d-%m-%Y',
+        inputEnabled:true,
+        inputDateFormat:'%d %b %Y',
+	/*
         inputEditDateFormat:'%d-%m-%Y',
 	inputDateParser:function(value)
 	{
@@ -148,7 +149,8 @@ $(document).ready(function(){
       },
       
       tooltip:{
-        shared:true,
+      shared:true,
+	      split:false,
 	valueDecimals:3,
 	 dateTimeLabelFormats: {
                     millisecond: '%A %e %b %Y, %H:%M:%S.%L',
@@ -163,18 +165,6 @@ $(document).ready(function(){
 
       series:[
 		{
-			name:"Eonia",
-			data:data["eonia"],
-			visible:false
-		},
-		{
-			name:"Minmax Eonia",
-			data:data["eoniaRANGE"],
-			visible:false,
-			type:"arearange",
-			color:Highcharts.getOptions().colors[0]
-		},
-		{
 			name:"Eur-1m",
 			data:data["eur1m"],
 		},
@@ -183,7 +173,7 @@ $(document).ready(function(){
 			data:data["eur1mRANGE"],
 			visible:false,
 			type:"arearange",
-			color:Highcharts.getOptions().colors[1]
+			color:Highcharts.getOptions().colors[0]
 		},
 		{
 			name:"Eur-3m",
@@ -195,7 +185,7 @@ $(document).ready(function(){
 			data:data["eur3mRANGE"],
 			visible:false,
 			type:"arearange",
-			color:Highcharts.getOptions().colors[2]
+			color:Highcharts.getOptions().colors[1]
 		},
 		{
 			name:"Eur-6m",
@@ -207,7 +197,7 @@ $(document).ready(function(){
 			data:data["eur6mRANGE"],
 			visible:false,
 			type:"arearange",
-			color:Highcharts.getOptions().colors[3]
+			color:Highcharts.getOptions().colors[2]
 		},
 		{
 			name:"Eur-12m",
@@ -217,6 +207,18 @@ $(document).ready(function(){
 		{
 			name:"Minmax Eur-12m",
 			data:data["eur12mRANGE"],
+			visible:false,
+			type:"arearange",
+			color:Highcharts.getOptions().colors[3]
+		},
+		{
+			name:"Eonia",
+			data:data["eonia"],
+			visible:false
+		},
+		{
+			name:"Minmax Eonia",
+			data:data["eoniaRANGE"],
 			visible:false,
 			type:"arearange",
 			color:Highcharts.getOptions().colors[4]
