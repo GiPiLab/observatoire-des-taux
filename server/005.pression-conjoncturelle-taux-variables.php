@@ -210,7 +210,7 @@ echo "<div class='row'><div class='col s12'>";
   echo '<p>La théorie des jauges de pression conjoncturelle© est exploitable sous forme graphique et chiffrée.</p>';
   echo '<p><strong>Sous forme graphique, elle offre un visuel clair de l\'espace séparant le point observé des limites hautes et basses de la jauge à une date donnée. Elle fournit un indicateur des marges haussières et baissières disponibles avant franchissement des limites historiques.</strong></p>';
   echo '<p>Dans sa forme chiffrée, elle permet de connaître le rang occupé par le point observé dans la hiérarchie des valeurs enregistrées depuis l\'origine et depuis le début de l\'exercice en cours. Par convention, une valeur de rang 1 est la plus élevée de la période.</p>';
-  echo '<p>La théorie des jauges de pression conjoncturelle© est un outil d\'aide à l\'anticipation. A ce titre, il n\'est pas utile d\'appliquer l\'analyse chiffrée à une date antérieure. Par contre, les analyses chiffrées et graphiques doivent impérativement être exploitées en parallèle avant toute décision susceptible d\'interférer avec la structure d\'adossement de la dette locale.</p>';
+  echo '<p>La théorie des jauges de pression conjoncturelle© est un outil d\'aide à l\'anticipation. Les analyses chiffrées et graphiques doivent impérativement être exploitées en parallèle avant toute décision susceptible d\'interférer avec la structure d\'adossement de la dette locale.</p>';
 
 echo "</div></div>";
 
