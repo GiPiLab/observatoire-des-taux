@@ -53,8 +53,6 @@ $annee=(int)$annee;
 
 ?>
 
-
-
 <div class="row">
 	<div class="col m6 s12">
 		<h4>Courbes des taux variables, exercice&nbsp;<?php echo $annee;?></h4>
@@ -90,6 +88,13 @@ tableau_variations_annuelles($annee,$connect);
 echo "</div></div>";
 ?>
 
+<?php if($annee>=2020){
+	$esterOrEonia="ester";
+}
+else{
+	$esterOrEonia="eonia";
+}
+?>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -128,15 +133,14 @@ $(document).ready(function(){
 		text:"©2006-<?php echo date('Y');?> Laboratoire de Recherche pour le Développement Local"
 	},
 
-	chart: {
-	animation:false,
+	chart: {	
 	renderTo: 'graphiqueVariable'
 	},
 
 	title: {text: 'Évolution de la courbe des taux'},
 
 	xAxis: {
-	categories:['Eonia','Eur-1m','Eur-3m','Eur-6m','Eur-12m']
+	categories:['<?php echo ucfirst($esterOrEonia);?>','Eur-1m','Eur-3m','Eur-6m','Eur-12m']
 	},
 
 	yAxis: {
@@ -151,8 +155,7 @@ $(document).ready(function(){
 
 	plotOptions: {
             line: {
-	    	animation:false,
-                dataLabels: {
+	    	    dataLabels: {
                     enabled: true,
 		    format: '{point.y:,.3f}'
                 }
@@ -162,11 +165,11 @@ $(document).ready(function(){
 	series:[
 	{
 		name:data["dernierJourConnu"]["date"],
-		data:[data["dernierJourConnu"]["eonia"],data["dernierJourConnu"]["1_mois"],data["dernierJourConnu"]["3_mois"],data["dernierJourConnu"]["6_mois"],data["dernierJourConnu"]["12_mois"]]
+		data:[data["dernierJourConnu"]["<?php echo $esterOrEonia;?>"],data["dernierJourConnu"]["1_mois"],data["dernierJourConnu"]["3_mois"],data["dernierJourConnu"]["6_mois"],data["dernierJourConnu"]["12_mois"]]
 		},
 	{
 		name:data["premierJourAnnee"]["date"],
-		data:[data["premierJourAnnee"]["eonia"],data["premierJourAnnee"]["1_mois"],data["premierJourAnnee"]["3_mois"],
+		data:[data["premierJourAnnee"]["<?php echo $esterOrEonia;?>"],data["premierJourAnnee"]["1_mois"],data["premierJourAnnee"]["3_mois"],
 			data["premierJourAnnee"]["6_mois"],data["premierJourAnnee"]["12_mois"]]
 	}
 		] 

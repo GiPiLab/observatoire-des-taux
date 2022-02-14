@@ -1,4 +1,4 @@
-<?php if(!defined('GIPISITE'))exit();
+<?php if (!defined('GIPISITE')) exit();
 /*
 * Observatoire des taux
 *
@@ -40,143 +40,205 @@
 */
 
 require_once "progs/taux/fonctions_taux.php";
-  
-if(!isset($_GET['annee']))$annee=date('Y');else $annee=$_GET['annee'];
 
-if(!is_numeric($annee) || (int)$annee>date("Y") || (int)$annee <1999)die("Année incorrecte !");
+if (!isset($_GET['annee'])) $annee = date('Y');
+else $annee = $_GET['annee'];
 
-$annee=(int)$annee;
+if (!is_numeric($annee) || (int)$annee > date("Y") || (int)$annee < 1999) die("Année incorrecte !");
 
-$connect=connect_base();
+$annee = (int)$annee;
+
+
+if ($annee >= 2020) {
+	$esterOrEonia = "ester";
+} else {
+	$esterOrEonia = "eonia";
+}
+
+
+$connect = connect_base();
 ?>
 <script type="text/javascript" language="javascript">
-$(document).ready(function(){
+	$(document).ready(function() {
 
-	var chartVariable;
-	var req='progs/taux/getTauxJSON.php?annee=<?php echo $annee;?>';
+		var chartVariable;
+		var req = 'progs/taux/getTauxJSON.php?annee=<?php echo $annee; ?>';
 
-	var jqxhr=$.getJSON(req,function(data,status){
+		var jqxhr = $.getJSON(req, function(data, status) {
 
-	chartVariable = new Highcharts.chart({
-      exporting:{
-      	buttons:{
-		contextButton:{
-		menuItems:[{
-		text:"Enregistrer au format PNG",
-			
-			onclick:function(){
-				$("body").addClass("loading");	
-				setTimeout(function(){chartVariable.exportChartLocal();$("body").removeClass("loading");},1000);
-			}
-		}],
-		}
-	}
-  },
+			chartVariable = new Highcharts.chart({
+				exporting: {
+					buttons: {
+						contextButton: {
+							menuItems: [{
+								text: "Enregistrer au format PNG",
 
-	credits:{enabled:true,
-     		href:"",
-		text:"©2006-<?php echo date('Y');?> Laboratoire de Recherche pour le Développement Local"
-	},
-	
-	chart: {
-	type:'scatter',
-	animation:false,
-		renderTo: 'graphique',
-		zoomType:"xy"
-	},
+								onclick: function() {
+									$("body").addClass("loading");
+									setTimeout(function() {
+										chartVariable.exportChartLocal();
+										$("body").removeClass("loading");
+									}, 1000);
+								}
+							}],
+						}
+					}
+				},
 
-	title: {text: 'Pression conjoncturelle des taux variables'},
+				credits: {
+					enabled: true,
+					href: "",
+					text: "©2006-<?php echo date('Y'); ?> Laboratoire de Recherche pour le Développement Local"
+				},
 
-	xAxis: {
-	categories:['Eonia','Eur-1m','Eur-3m','Eur-6m','Eur-12m']
-	},
+				chart: {
+					type: 'scatter',
+					renderTo: 'graphique',
+					zoomType: "xy"
+				},
 
-	legend:{
-	enabled:false
-	},
+				title: {
+					text: 'Pression conjoncturelle des taux variables'
+				},
 
-	yAxis: {
-	title:{text:"Taux"}
-	},
+				xAxis: {
+					categories: ['<?php echo ucfirst($esterOrEonia); ?>', 'Eur-1m', 'Eur-3m', 'Eur-6m', 'Eur-12m']
+				},
 
-	tooltip:{
-         formatter:function(){if(this.series.options.currentVal!=this.y)return false; else return "<b>"+this.series.name+"</b><br />Jauge du "+this.series.options.laDate+"<br />"}
-	},
+				legend: {
+					enabled: false
+				},
 
-	plotOptions: {
-            scatter: {
-	animation:false,
-	    	lineWidth:2,
-	     	dataLabels: {
-		enabled: true,
-		format: '{point.y:,.3f}'
-		},
-	marker:{
-		radius:6,
-		symbol:'circle'
-	}
+				yAxis: {
+					title: {
+						text: "Taux"
+					}
+				},
 
-	 }
-        },
+				tooltip: {
+					formatter: function() {
+						if (this.series.options.currentVal != this.y) return false;
+						else return "<b>" + this.series.name + "</b><br />Jauge du " + this.series.options.laDate + "<br />"
+					}
+				},
 
-	series:[
-	{
-		name:"Eonia",
-		data:[[0,data["eonia"]["min"]],[0,data["eonia"]["max"]],{x:0,y:data["eonia"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["eonia"]["date"],
-		currentVal:data["eonia"]["current"]		
+				plotOptions: {
+					scatter: {						
+						lineWidth: 2,
+						dataLabels: {
+							enabled: true,
+							format: '{point.y:,.3f}'
+						},
+						marker: {
+							radius: 6,
+							symbol: 'circle'
+						}
 
-	    },
+					}
+				},
 
-	{
-		name:"Euribor 1 mois",
-		data:[[1,data["euribors"]["unMois"]["min"]],[1,data["euribors"]["unMois"]["max"]],{x:1,y:data["euribors"]["unMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"],
-		currentVal:data["euribors"]["unMois"]["current"]		
-		},
-	{
-		name:"Euribor 3 mois",
-		data:[[2,data["euribors"]["troisMois"]["min"]],[2,data["euribors"]["troisMois"]["max"]],{x:2,y:data["euribors"]["troisMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"],
-		currentVal:data["euribors"]["troisMois"]["current"]		
-		},
-	{
-		name:"Euribor 6 mois",
-		data:[[3,data["euribors"]["sixMois"]["min"]],[3,data["euribors"]["sixMois"]["max"]],{x:3,y:data["euribors"]["sixMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"],
-		currentVal:data["euribors"]["sixMois"]["current"]		
-		},
-	{
-		name:"Euribor 12 mois",
-		data:[[4,data["euribors"]["douzeMois"]["min"]],[4,data["euribors"]["douzeMois"]["max"]],{x:4,y:data["euribors"]["douzeMois"]["current"],marker:{fillColor:'#ff0000'}}],
-		laDate:data["euribors"]["date"],
-		currentVal:data["euribors"]["douzeMois"]["current"]		
-		}
-		] 
+				series: [{
+						name: "<?php echo ucfirst($esterOrEonia);?>",
+						data: [
+							[0, data["<?php echo $esterOrEonia; ?>"]["min"]],
+							[0, data["<?php echo $esterOrEonia; ?>"]["max"]], {
+								x: 0,
+								y: data["<?php echo $esterOrEonia; ?>"]["current"],
+								marker: {
+									fillColor: '#ff0000'
+								}
+							}
+						],
+						laDate: data["<?php echo $esterOrEonia; ?>"]["date"],
+						currentVal: data["<?php echo $esterOrEonia; ?>"]["current"]
+					},
+
+					{
+						name: "Euribor 1 mois",
+						data: [
+							[1, data["euribors"]["unMois"]["min"]],
+							[1, data["euribors"]["unMois"]["max"]], {
+								x: 1,
+								y: data["euribors"]["unMois"]["current"],
+								marker: {
+									fillColor: '#ff0000'
+								}
+							}
+						],
+						laDate: data["euribors"]["date"],
+						currentVal: data["euribors"]["unMois"]["current"]
+					},
+					{
+						name: "Euribor 3 mois",
+						data: [
+							[2, data["euribors"]["troisMois"]["min"]],
+							[2, data["euribors"]["troisMois"]["max"]], {
+								x: 2,
+								y: data["euribors"]["troisMois"]["current"],
+								marker: {
+									fillColor: '#ff0000'
+								}
+							}
+						],
+						laDate: data["euribors"]["date"],
+						currentVal: data["euribors"]["troisMois"]["current"]
+					},
+					{
+						name: "Euribor 6 mois",
+						data: [
+							[3, data["euribors"]["sixMois"]["min"]],
+							[3, data["euribors"]["sixMois"]["max"]], {
+								x: 3,
+								y: data["euribors"]["sixMois"]["current"],
+								marker: {
+									fillColor: '#ff0000'
+								}
+							}
+						],
+						laDate: data["euribors"]["date"],
+						currentVal: data["euribors"]["sixMois"]["current"]
+					},
+					{
+						name: "Euribor 12 mois",
+						data: [
+							[4, data["euribors"]["douzeMois"]["min"]],
+							[4, data["euribors"]["douzeMois"]["max"]], {
+								x: 4,
+								y: data["euribors"]["douzeMois"]["current"],
+								marker: {
+									fillColor: '#ff0000'
+								}
+							}
+						],
+						laDate: data["euribors"]["date"],
+						currentVal: data["euribors"]["douzeMois"]["current"]
+					}
+				]
+			});
+
+			$("#message").hide();
+
+		}).fail(function(msg) {
+			$("#message").text("Erreur de communication avec le serveur...");
+			alert(msg.responseText);
+		});
+
 	});
-
-	$("#message").hide();
-
-	}).fail(function(msg){
-		$("#message").text("Erreur de communication avec le serveur...");
-		alert(msg.responseText);});
-
-});
 </script>
 
 
 <div class="row">
 	<div class="col m6 s12">
-		<h4>Pression conjoncturelle des taux variables, exercice&nbsp;<?php echo $annee;?></h4>
+		<h4>Pression conjoncturelle des taux variables, exercice&nbsp;<?php echo $annee; ?></h4>
 	</div>
 	<div style="margin-top:1em" class="col m6 s12">
-		<form action="<?php echo $_SERVER['REQUEST_URI'];?>" method="GET">
-		<!-- hardcoded page number, ugly but easy xss prevention -->
-		<input type="hidden" name="page" value="5" />
+		<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="GET">
+			<!-- hardcoded page number, ugly but easy xss prevention -->
+			<input type="hidden" name="page" value="5" />
 			<label>Choisir l'exercice :</label>
-			<span id="valueRange"><?php echo $annee;?></span>
+			<span id="valueRange"><?php echo $annee; ?></span>
 			<div class="range-field">
-				<input style="width:100%" type="range" min="1999" max="<?php echo date('Y');?>" value="<?php echo $annee;?>" onInput="document.getElementById('valueRange').innerHTML=this.value;" name="annee">
+				<input style="width:100%" type="range" min="1999" max="<?php echo date('Y'); ?>" value="<?php echo $annee; ?>" onInput="document.getElementById('valueRange').innerHTML=this.value;" name="annee">
 				<input class="btn" style="width:100%" type="submit" value="Valider" />
 			</div>
 		</form>
@@ -187,34 +249,34 @@ $(document).ready(function(){
 
 <div class="row">
 	<div class="col s12" id="variables">
-<?php
-$dernier_connu_sql=tableau_variations_veille($annee,$connect,0);
-list($y,$m,$d)=explode('-',$dernier_connu_sql[0]);
-$derniere_date="$d-$m-$y";
+		<?php
+		$dernier_connu_sql = tableau_variations_veille($annee, $connect, 0);
+		list($y, $m, $d) = explode('-', $dernier_connu_sql[0]);
+		$derniere_date = "$d-$m-$y";
 
-echo "<div class='row'>";
+		echo "<div class='row'>";
 
-echo "<div class='center-align col s12'>";
-echo "<div id='graphique'>";
-echo " <div id='message' class='center-align'><img width='124' height='124' src='gears.gif' alt='loading'><p>Traitement des données en cours, merci de patienter...</p></div>";
-echo "</div></div></div>";
-echo "<div class='row'><div class='col l6 m12 s12'>";
+		echo "<div class='center-align col s12'>";
+		echo "<div id='graphique'>";
+		echo " <div id='message' class='center-align'><img width='124' height='124' src='gears.gif' alt='loading'><p>Traitement des données en cours, merci de patienter...</p></div>";
+		echo "</div></div></div>";
+		echo "<div class='row'><div class='col l6 m12 s12'>";
 
-  tableau_plus_annuel($annee,$dernier_connu_sql,$connect);
-echo "</div><div class='col l6 m12 s12'>";
-tableau_plus_tout($dernier_connu_sql,$connect);
-echo "</div></div>";
+		tableau_plus_annuel($annee, $dernier_connu_sql, $connect);
+		echo "</div><div class='col l6 m12 s12'>";
+		tableau_plus_tout($dernier_connu_sql, $connect);
+		echo "</div></div>";
 
-echo "<div class='row'><div class='col s12'>";
-  echo 'La théorie des jauges de pression conjoncturelle© avance que l\'émergence d\'une inversion de tendance (haussière ou baissière) du cycle EURIBOR (ou de tout autre type de grandeur) doit donner lieu à une analyse de la position du point mesuré lorsqu\'il est placé sur une échelle (la jauge) dont les limites correspondent aux extrêmes historiques de la grandeur mesurée.';
-  echo '<p>La théorie des jauges de pression conjoncturelle© est exploitable sous forme graphique et chiffrée.</p>';
-  echo '<p><strong>Sous forme graphique, elle offre un visuel clair de l\'espace séparant le point observé des limites hautes et basses de la jauge à une date donnée. Elle fournit un indicateur des marges haussières et baissières disponibles avant franchissement des limites historiques.</strong></p>';
-  echo '<p>Dans sa forme chiffrée, elle permet de connaître le rang occupé par le point observé dans la hiérarchie des valeurs enregistrées depuis l\'origine et depuis le début de l\'exercice en cours. Par convention, une valeur de rang 1 est la plus élevée de la période.</p>';
-  echo '<p>La théorie des jauges de pression conjoncturelle© est un outil d\'aide à l\'anticipation. Les analyses chiffrées et graphiques doivent impérativement être exploitées en parallèle avant toute décision susceptible d\'interférer avec la structure d\'adossement de la dette locale.</p>';
+		echo "<div class='row'><div class='col s12'>";
+		echo 'La théorie des jauges de pression conjoncturelle© avance que l\'émergence d\'une inversion de tendance (haussière ou baissière) du cycle EURIBOR (ou de tout autre type de grandeur) doit donner lieu à une analyse de la position du point mesuré lorsqu\'il est placé sur une échelle (la jauge) dont les limites correspondent aux extrêmes historiques de la grandeur mesurée.';
+		echo '<p>La théorie des jauges de pression conjoncturelle© est exploitable sous forme graphique et chiffrée.</p>';
+		echo '<p><strong>Sous forme graphique, elle offre un visuel clair de l\'espace séparant le point observé des limites hautes et basses de la jauge à une date donnée. Elle fournit un indicateur des marges haussières et baissières disponibles avant franchissement des limites historiques.</strong></p>';
+		echo '<p>Dans sa forme chiffrée, elle permet de connaître le rang occupé par le point observé dans la hiérarchie des valeurs enregistrées depuis l\'origine et depuis le début de l\'exercice en cours. Par convention, une valeur de rang 1 est la plus élevée de la période.</p>';
+		echo '<p>La théorie des jauges de pression conjoncturelle© est un outil d\'aide à l\'anticipation. Les analyses chiffrées et graphiques doivent impérativement être exploitées en parallèle avant toute décision susceptible d\'interférer avec la structure d\'adossement de la dette locale.</p>';
 
-echo "</div></div>";
+		echo "</div></div>";
 
-?>
+		?>
 
 
 

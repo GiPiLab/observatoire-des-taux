@@ -131,8 +131,7 @@ $(document).ready(function(){
 		text:"©2006-<?php echo date('Y');?> Laboratoire de Recherche pour le Développement Local"
 	},
 
-	chart: {
-	    	animation:false,
+	chart: {	    	
 	renderTo: 'graphiqueFixe'
 	},
 
@@ -153,8 +152,7 @@ $(document).ready(function(){
 
 
 	plotOptions: {
-            line: {
-	animation:false,
+            line: {	
                 dataLabels: {
                     enabled: true,
 		format: '{point.y:,.3f}'

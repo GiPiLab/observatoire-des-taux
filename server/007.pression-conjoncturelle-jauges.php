@@ -47,6 +47,12 @@ if(!is_numeric($annee) || (int)$annee>date("Y") || (int)$annee <1999)die("Année
 
 $annee=(int)$annee;
 
+if ($annee >= 2020) {
+	$esterOrEonia = "ester";
+} else {
+	$esterOrEonia = "eonia";
+}
+
 $connect=connect_base();
 ?>
 <script type="text/javascript" language="javascript">
@@ -58,9 +64,9 @@ $(document).ready(function(){
     $.getJSON(reqJSON,function(mesData,status){
 
 	    $('#tooltipeonia').html(
-	    "<div style='text-align:left'>Eonia ("+mesData.eonia.date+")<hr>taux : "+mesData.eonia.current
-		    +"%<br>précédent : "+mesData.eonia.prev+"%<br>plus petit : "+mesData.eonia.min
-		    +"%<br>plus grand : "+mesData.eonia.max+"%</div>");
+	    "<div style='text-align:left'><?php echo ucfirst($esterOrEonia); ?> ("+mesData.<?php echo $esterOrEonia; ?>.date+")<hr>taux : "+mesData.<?php echo $esterOrEonia; ?>.current
+		    +"%<br>précédent : "+mesData.<?php echo $esterOrEonia; ?>.prev+"%<br>plus petit : "+mesData.<?php echo $esterOrEonia; ?>.min
+		    +"%<br>plus grand : "+mesData.<?php echo $esterOrEonia; ?>.max+"%</div>");
 	    
 	    $('#tooltipeur1m').html("<div style='text-align:left'>Eur-1m ("+mesData.euribors.date+")<hr>taux : "+mesData.euribors.unMois.current
 		    +"%<br>précédent : "+mesData.euribors.unMois.prev+"%<br>plus petit : "+mesData.euribors.unMois.min
@@ -102,8 +108,8 @@ $(document).ready(function(){
 		    +"%<br>précédent : "+mesData.tecs.tec30.prev+"%<br>plus petit : "+mesData.tecs.tec30.min
 		    +"%<br>plus grand : "+mesData.tecs.tec30.max+"%</div>");
 	    
-	    var floatEoCurrent=mesData.eonia.current;
-	    var floatEoPrev=mesData.eonia.prev;
+	    var floatEoCurrent=mesData.<?php echo $esterOrEonia; ?>.current;
+	    var floatEoPrev=mesData.<?php echo $esterOrEonia; ?>.prev;
 	    var floatEur1mCurrent=mesData.euribors.unMois.current;
 	    var floatEur1mPrev=mesData.euribors.unMois.prev;
 	    var floatEur3mCurrent=mesData.euribors.troisMois.current;
@@ -128,7 +134,7 @@ $(document).ready(function(){
 	    if(floatEoCurrent<floatEoPrev)
 	    {
 		    symboleEo='↓';
-	    }
+			<?php echo $esterOrEonia; ?>	    }
 	    else if(floatEoCurrent>floatEoPrev)
 	    {
 		    symboleEo='↑';
@@ -226,7 +232,7 @@ $(document).ready(function(){
 		min:mesData.eonia.min,
 		max:mesData.eonia.max,
 		relativeGaugeSize:true,
-		label:"Eonia "+symboleEo
+		label:"<?php echo ucfirst($esterOrEonia); ?> "+symboleEo
 
     });
 	    var gEur1m=new JustGage({

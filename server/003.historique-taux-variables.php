@@ -80,17 +80,8 @@ $(document).ready(function(){
         height:30,
       },
       
-      rangeSelector: {
-        inputEnabled:true,
-        inputDateFormat:'%d %b %Y',
-	/*
-        inputEditDateFormat:'%d-%m-%Y',
-	inputDateParser:function(value)
-	{
-		value=value.split(/-/);
-		ladate=Date.UTC(parseInt(value[2]),parseInt(value[1])-1,parseInt(value[0]));
-		return ladate;
-	},*/
+      rangeSelector: {        
+        inputDateFormat:'%d %b %Y',	
         buttons: [
           {
             type: 'month',
@@ -114,8 +105,7 @@ $(document).ready(function(){
       
       chart: {
         renderTo: 'graphiqueVariable',
-	animation:false,
-        zoomType:'x'
+	    zoomType:'x'
       },
       
       title: {text: 'Historique des taux variables'},
@@ -222,6 +212,18 @@ $(document).ready(function(){
 			visible:false,
 			type:"arearange",
 			color:Highcharts.getOptions().colors[4]
+		},
+		{
+			name:"Ester",
+			data:data["ester"],
+			visible:false
+		},
+		{
+			name:"Minmax Ester",
+			data:data["esterRANGE"],
+			visible:false,
+			type:"arearange",
+			color:Highcharts.getOptions().colors[5]
 		}
      ],
       
@@ -241,8 +243,7 @@ $(document).ready(function(){
 			month: ['%B %Y', '%B', '-%B %Y'],
 			year: ['%Y', '%Y', '-%Y']
 		}
-          },
-	animation:false
+          },	
 		},
 
       arearange:{
@@ -269,25 +270,6 @@ $(document).ready(function(){
      
    $("#messageVariable").hide();
 
-
-/*
-     $("#checkboxEONIA").on("change",function(){
-	     if(this.checked)
-	     {
-		chartVariable.addSeries({	
-			name:"Eonia",
-			id:"Eonia",
-			data:data["eonia"]
-	     });
-	     }
-	     else
-	     {
-		     chartVariable.get("Eonia").remove();
-
-	     }
-      });*/
-
-
   })
     .fail(function(msg){
       $("#messageVariable").text("Erreur de communication avec le serveur...");
@@ -307,20 +289,11 @@ $(document).ready(function(){
 	</div>
 </div>
 </div>
-<!--
-<div class="row">
-<div class="col s3">
-<input type="checkbox" id="checkboxEONIA" value="EONIA">
-<label for="checkboxEONIA">EONIA</label>
-</div>
-</div>
--->
 
 
 <div class="row">
 <div class="col s12">
-<p>Ce graphique présente l'évolution des taux depuis leur création. Selon le niveau de zoom les taux sont regroupés par mois ou par semaine et la valeur affichée correspond à leurs moyennes mensuelles (ou hebdomadaires). Les courbes "Minmax" illustrent l'évolution des extrêmes de chaque taux au fil du temps. Le décalage éventuel entre les courbes Minmax et les extrêmes affichés des taux est dû au regroupement des valeurs expliqué précédemment. A un instant donné, la valeur du taux et les deux valeurs de la courbe Minmax associée représentent la pression conjonctuelle du jour pour ce taux. Ainsi la courbe historique munie de sa courbe Minmax peut être vue comme une représentation de l'évolution de la pression conjoncturelle au fil du temps&nbsp;!</p>
-  
+<p>Ce graphique présente l'évolution des taux depuis leur création. Selon le niveau de zoom les taux sont regroupés par mois ou par semaine et la valeur affichée correspond à leurs moyennes mensuelles (ou hebdomadaires). Les courbes "Minmax" illustrent l'évolution des extrêmes de chaque taux au fil du temps. Le décalage éventuel entre les courbes Minmax et les extrêmes affichés des taux est dû au regroupement des valeurs expliqué précédemment. A un instant donné, la valeur du taux et les deux valeurs de la courbe Minmax associée représentent la pression conjonctuelle du jour pour ce taux. Ainsi la courbe historique munie de sa courbe Minmax peut être vue comme une représentation de l'évolution de la pression conjoncturelle au fil du temps&nbsp;!</p> 
 	</div>
 
 </div>

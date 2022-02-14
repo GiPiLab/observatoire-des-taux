@@ -112,8 +112,7 @@ $(document).ready(function(){
       },
       
       chart: {
-      renderTo: 'graphiqueFixe',
-	animation:false,
+      renderTo: 'graphiqueFixe',	
         zoomType:'x'
       },
       
@@ -230,8 +229,7 @@ $(document).ready(function(){
       plotOptions:{       
       series:{
 
-	animation:false,
-          dataGrouping:{
+	   dataGrouping:{
 	  	groupPixelWidth:10,
 		  dateTimeLabelFormats:
 		  {
