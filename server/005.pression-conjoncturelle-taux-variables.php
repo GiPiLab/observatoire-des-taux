@@ -123,7 +123,7 @@ $connect = connect_base();
 				},
 
 				plotOptions: {
-					scatter: {						
+					scatter: {
 						lineWidth: 2,
 						dataLabels: {
 							enabled: true,
@@ -138,7 +138,7 @@ $connect = connect_base();
 				},
 
 				series: [{
-						name: "<?php echo ucfirst($esterOrEonia);?>",
+						name: "<?php echo ucfirst($esterOrEonia); ?>",
 						data: [
 							[0, data["<?php echo $esterOrEonia; ?>"]["min"]],
 							[0, data["<?php echo $esterOrEonia; ?>"]["max"]], {
