@@ -133,8 +133,7 @@ $connect = connect_base();
 
 			var symboleEo = '→';
 			if (floatEoCurrent < floatEoPrev) {
-				symboleEo = '↓';
-				<?php echo $esterOrEonia; ?>
+				symboleEo = '↓';				
 			} else if (floatEoCurrent > floatEoPrev) {
 				symboleEo = '↑';
 			}
@@ -196,13 +195,11 @@ $connect = connect_base();
 
 
 			var gEonia = new JustGage({
-				id: "jaugeEonia",
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
+				id: "jauge<?php echo ucfirst($esterOrEonia); ?>",
 				value: floatEoCurrent,
 				decimals: 3,
-				min: mesData.eonia.min,
-				max: mesData.eonia.max,
+				min: mesData.<?php echo $esterOrEonia; ?>.min,
+				max: mesData.<?php echo $esterOrEonia; ?>.max,			
 				relativeGaugeSize: true,
 				label: "<?php echo ucfirst($esterOrEonia); ?> " + symboleEo
 
@@ -210,8 +207,6 @@ $connect = connect_base();
 			var gEur1m = new JustGage({
 				id: "jaugeEur1m",
 				value: floatEur1mCurrent,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.euribors.unMois.min,
 				max: mesData.euribors.unMois.max,
@@ -222,8 +217,6 @@ $connect = connect_base();
 			var gEur3m = new JustGage({
 				id: "jaugeEur3m",
 				value: floatEur3mCurrent,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.euribors.troisMois.min,
 				max: mesData.euribors.troisMois.max,
@@ -234,8 +227,6 @@ $connect = connect_base();
 			var gEur6m = new JustGage({
 				id: "jaugeEur6m",
 				value: floatEur6mCurrent,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.euribors.sixMois.min,
 				max: mesData.euribors.sixMois.max,
@@ -246,8 +237,6 @@ $connect = connect_base();
 			var gEur12m = new JustGage({
 				id: "jaugeEur12m",
 				value: floatEur12mCurrent,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.euribors.douzeMois.min,
 				max: mesData.euribors.douzeMois.max,
@@ -257,8 +246,6 @@ $connect = connect_base();
 			});
 			var gTec10 = new JustGage({
 				id: "jaugeTEC10",
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				value: floatTEC10Current,
 				decimals: 3,
 				min: mesData.tecs.tec10.min,
@@ -269,8 +256,6 @@ $connect = connect_base();
 			var gTec15 = new JustGage({
 				id: "jaugeTEC15",
 				value: floatTEC15Current,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.tecs.tec15.min,
 				max: mesData.tecs.tec15.max,
@@ -280,8 +265,6 @@ $connect = connect_base();
 			var gTec20 = new JustGage({
 				id: "jaugeTEC20",
 				value: floatTEC20Current,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.tecs.tec20.min,
 				max: mesData.tecs.tec20.max,
@@ -291,8 +274,6 @@ $connect = connect_base();
 			var gTec25 = new JustGage({
 				id: "jaugeTEC25",
 				value: floatTEC25Current,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.tecs.tec25.min,
 				max: mesData.tecs.tec25.max,
@@ -302,8 +283,6 @@ $connect = connect_base();
 			var gTec30 = new JustGage({
 				id: "jaugeTEC30",
 				value: floatTEC30Current,
-				startAnimationTime: 0,
-				refreshAnimationTime: 0,
 				decimals: 3,
 				min: mesData.tecs.tec30.min,
 				max: mesData.tecs.tec30.max,
@@ -353,7 +332,7 @@ $connect = connect_base();
 						</div>
 					</div>
 					<div class="row">
-						<div id="jaugeEonia" style="height:150px" class="tooltip col s6"><span class="tooltiptext" id="tooltipeonia"></span></div>
+						<div id="jauge<?php echo ucfirst($esterOrEonia);?>" style="height:150px" class="tooltip col s6"><span class="tooltiptext" id="tooltipeonia"></span></div>
 						<div id="jaugeEur1m" style="height:150px" class="tooltip col s6"><span class="tooltiptext" id="tooltipeur1m"></span></div>
 					</div>
 					<div class="row">

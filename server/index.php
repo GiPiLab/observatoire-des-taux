@@ -39,58 +39,45 @@
 *
 */
 
-define('GIPISITE',true);
+define('GIPISITE', true);
 
-$pageCourante=filter_input(INPUT_GET,'page',FILTER_VALIDATE_INT);
-if($pageCourante===false)
-{
-	header("Status: 403 Forbidden",false,403);
+$pageCourante = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
+if ($pageCourante === false) {
+	header("Status: 403 Forbidden", false, 403);
 	die("Bad format");
-}
-elseif($pageCourante===NULL)
-{
-	$pageCourante=1;
-}
-elseif($pageCourante<=0 || $pageCourante>12)
-{
-	header("Status: 404 Not Found",false,404);
+} elseif ($pageCourante === NULL) {
+	$pageCourante = 1;
+} elseif ($pageCourante <= 0 || $pageCourante > 12) {
+	header("Status: 404 Not Found", false, 404);
 	die("Invalid page number");
 }
 
-try
-{
-	$db=new SQLite3("pages.sqlite3",SQLITE3_OPEN_READONLY);
-}
-catch(Exception $e)
-{
-	header("Status: 500 Internal Server Error",false,500);
+try {
+	$db = new SQLite3("pages.sqlite3", SQLITE3_OPEN_READONLY);
+} catch (Exception $e) {
+	header("Status: 500 Internal Server Error", false, 500);
 	die($e->getMessage());
 }
 
-$res=$db->querySingle("select * from pages where id='$pageCourante'",true);
-if($res===FALSE)
-{
-	header("Status: 500 Internal Server Error",false,500);
+$res = $db->querySingle("select * from pages where id='$pageCourante'", true);
+if ($res === FALSE) {
+	header("Status: 500 Internal Server Error", false, 500);
 	$db->close();
 	die("Error prepare");
 }
-if(!empty($res))
-{
-	$fileName=$res['file'];
-	$pageTitle=$res['title'];
-}
-else
-{
-	header("Status: 404 Not Found",false,404);
+if (!empty($res)) {
+	$fileName = $res['file'];
+	$pageTitle = $res['title'];
+} else {
+	header("Status: 404 Not Found", false, 404);
 	$db->close();
 	die("Page not found");
 }
 
 $db->close();
 
-if(!file_exists("$fileName"))
-{
-	header("Status: 500 Internal Server Error",false,500);
+if (!file_exists("$fileName")) {
+	header("Status: 500 Internal Server Error", false, 500);
 	die("Invalid index entry $pageCourante");
 }
 
@@ -98,161 +85,153 @@ if(!file_exists("$fileName"))
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-  <title>Observatoire des taux</title>
-  <meta charset="UTF-8" />
+	<title>Observatoire des taux</title>
+	<meta charset="UTF-8" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  <link rel="icon" href="favicon.ico" />
+	<link rel="icon" href="favicon.ico" />
 
-<link rel="stylesheet" href="libs/materialize/css/materialize.min.css" />
-
-
-<style type="text/css">
+	<link rel="stylesheet" href="libs/materialize/css/materialize.min.css" />
 
 
-/* Tooltip container */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
+	<style type="text/css">
+		/* Tooltip container */
+		.tooltip {
+			position: relative;
+			display: inline-block;
+		}
 
-/* Tooltip text */
-.tooltip .tooltiptext {
-    visibility: hidden;
-	padding:8px;
-    background-color: rgba(0,0,0,0.7); 
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    bottom: 10%;
-    left: 25%; 
-}
+		/* Tooltip text */
+		.tooltip .tooltiptext {
+			visibility: hidden;
+			padding: 8px;
+			background-color: rgba(0, 0, 0, 0.7);
+			color: #fff;
+			text-align: center;
+			border-radius: 6px;
+			position: absolute;
+			z-index: 1;
+			bottom: 10%;
+			left: 25%;
+		}
 
 
 
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-}
+		.tooltip:hover .tooltiptext {
+			visibility: visible;
+		}
 
 
-/* Waiting overlay */
-.modal-waiting-overlay{
-	display:none;
-	position:fixed;
-	z-index:1000;
-	top:0;
-	left:0;
-	height:100%;
-	width:100%;
-	background:rgba(0,0,0,0.4)
-		url("gears.gif")
-		50% 50%
-		no-repeat;
-}
+		/* Waiting overlay */
+		.modal-waiting-overlay {
+			display: none;
+			position: fixed;
+			z-index: 1000;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 100%;
+			background: rgba(0, 0, 0, 0.4) url("gears.gif") 50% 50% no-repeat;
+		}
 
-body.loading{
-	overflow:hidden;
-}
+		body.loading {
+			overflow: hidden;
+		}
 
-body.loading .modal-waiting-overlay{
-	display:block;
-}
+		body.loading .modal-waiting-overlay {
+			display: block;
+		}
 
 
 
-.faq-question{
-	cursor:pointer;
-}
+		.faq-question {
+			cursor: pointer;
+		}
 
-.faq-answer {
-    display: none;
-    padding:0.5em 1em 0.5em 1.3em;
-    background-color: rgb(220,220,220);
-}
-
-
-dt{
-	font-weight:bold;
-	padding-top:1rem;
-}
-
-h4.lexique{
-	padding-top:2rem;
-
-}
+		.faq-answer {
+			display: none;
+			padding: 0.5em 1em 0.5em 1.3em;
+			background-color: rgb(220, 220, 220);
+		}
 
 
-.body-uniform{
-	background:white;
-}
+		dt {
+			font-weight: bold;
+			padding-top: 1rem;
+		}
+
+		h4.lexique {
+			padding-top: 2rem;
+
+		}
 
 
-td.petit
-{
-	padding:5px;
-
-}
-
-.collapsible-body li 
-{
-list-style-type:inherit !important;
-
-}
-
-.collection-item
-{
-	padding:5px 10px 5px 10px !important;
-}
-
-input.highcharts-range-selector {
-	background:white;
-	transition:none;
-}
-
-input[type=date]:not(.browser-default){
-	background:white;
-}
+		.body-uniform {
+			background: white;
+		}
 
 
-</style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+		td.petit {
+			padding: 5px;
 
-<script src="libs/materialize/materialize.min.js"></script>
+		}
 
-<?php if($pageCourante==7){?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="libs/justgage.js"></script>
-<?php }?>
+		.collapsible-body li {
+			list-style-type: inherit !important;
 
-<?php if($pageCourante!=7 && $pageCourante!=12){?>
+		}
 
-<script src="https://code.highcharts.com/stock/9.0/highstock.js"></script>
-<script src="https://code.highcharts.com/stock/9.0/highcharts-more.js"></script>
+		.collection-item {
+			padding: 5px 10px 5px 10px !important;
+		}
 
-<script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
-<?php }?>
+		input.highcharts-range-selector {
+			background: white;
+			transition: none;
+		}
 
-<?php if($pageCourante==8||$pageCourante==9){?>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.0.3/big.min.js" integrity="sha512-rxa46c1jksm8mFVGUHW8x01eLyyE7OJg5xUdLUavwC2Ltx8nnAjHoPE/C7r+q5bAxL0a1DGke/uTfzdB9aBBog==" crossorigin="anonymous"></script>
-<?php }?>
+		input[type=date]:not(.browser-default) {
+			background: white;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+	<script src="libs/materialize/materialize.min.js"></script>
+
+	<?php if ($pageCourante == 7) { ?>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="libs/justgage.js"></script>
+	<?php } ?>
+
+	<?php if ($pageCourante != 7 && $pageCourante != 12) { ?>
+
+		<script src="https://code.highcharts.com/stock/9.3/highstock.js"></script>
+		<script src="https://code.highcharts.com/stock/9.3/highcharts-more.js"></script>
+
+		<script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
+	<?php } ?>
+
+	<?php if ($pageCourante == 8 || $pageCourante == 9) { ?>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.0.3/big.min.js" integrity="sha512-rxa46c1jksm8mFVGUHW8x01eLyyE7OJg5xUdLUavwC2Ltx8nnAjHoPE/C7r+q5bAxL0a1DGke/uTfzdB9aBBog==" crossorigin="anonymous"></script>
+	<?php } ?>
 
 
 </head>
 
 <body class='body-uniform'>
 
-<main>
-<?php
-include("$fileName");
-?>
-</main>
+	<main>
+		<?php
+		include("$fileName");
+		?>
+	</main>
 
-<div class="modal-waiting-overlay"></div>
+	<div class="modal-waiting-overlay"></div>
 
 </body>
+
 </html>
