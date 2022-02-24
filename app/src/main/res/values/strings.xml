@@ -8,10 +8,10 @@
     <string name="taux_fixes">Taux fixes</string>
     <string name="site_address">https://gipilab.org</string>
     <string name="editorPrefLastUrlKey">lastURL</string>
-    <string name="courbe_des_taux">Courbe des taux \u2192</string>
-    <string name="historique_des_taux">Historique des taux \u2192</string>
-    <string name="pression_conjoncturelle">Pression conjoncturelle \u2192</string>
-    <string name="volatilit_des_taux">Volatilité des taux \u2192</string>
-    <string name="licence_et_code_source">Licence et code source</string>
-
+    <string name="courbe_des_taux">Courbe des taux</string>
+    <string name="historique_des_taux">Historique des taux</string>
+    <string name="pression_conjoncturelle">Pression conjoncturelle</string>
+    <string name="volatilit_des_taux">Volatilité des taux</string>
+    <string name="licence_et_code_source">Mentions légales</string>
+    <string name="apropos">À propos</string>
 </resources>

@@ -13,76 +13,77 @@
 
     <item
         android:id="@+id/subMenuPressionConjoncturelle"
-        android:title="@string/pression_conjoncturelle" />
-    <group
-        android:id="@+id/groupPression"
-        android:visible="false">
-        <item
-            android:id="@+id/buttonPressionConjoncturelleTauxVariables"
-            android:title="@string/taux_variables" />
+        android:title="@string/pression_conjoncturelle">
 
-        <item
-            android:id="@+id/buttonPressionConjoncturelleTauxFixes"
-            android:title="@string/taux_fixes" />
-
-        <item
-            android:id="@+id/buttonJauges"
-            android:title="@string/jauges_de_pression_conjoncturelle" />
-
-    </group>
+        <menu>
+            <item
+                android:id="@+id/buttonPressionConjoncturelleTauxFixes"
+                android:title="@string/taux_fixes" />
+            <item
+                android:id="@+id/buttonPressionConjoncturelleTauxVariables"
+                android:title="@string/taux_variables" />
+            <item
+                android:id="@+id/buttonJauges"
+                android:title="@string/jauges_de_pression_conjoncturelle" />
+        </menu>
+    </item>
 
     <item
         android:id="@+id/subMenuVolatilite"
-        android:title="@string/volatilit_des_taux" />
-    <group
-        android:id="@+id/groupVolatilite"
-        android:visible="false">
-        <item
-            android:id="@+id/buttonVolatiliteTauxVariables"
-            android:title="@string/taux_variables" />
+        android:title="@string/volatilit_des_taux">
+        <menu>
+            <item
+                android:id="@+id/buttonVolatiliteTauxVariables"
+                android:title="@string/taux_variables" />
 
-        <item
-            android:id="@+id/buttonVolatiliteTauxFixes"
-            android:title="@string/taux_fixes" />
-    </group>
-
+            <item
+                android:id="@+id/buttonVolatiliteTauxFixes"
+                android:title="@string/taux_fixes" />
+        </menu>
+    </item>
 
     <item
         android:id="@+id/subMenuCourbesDesTaux"
-        android:title="@string/courbe_des_taux" />
+        android:title="@string/courbe_des_taux">
 
-    <group
-        android:id="@+id/groupCourbesDesTaux"
-        android:visible="false">
-        <item
-            android:id="@+id/buttonCourbesDesTauxVariables"
-            android:title="@string/taux_variables" />
+        <menu>
+            <item
+                android:id="@+id/buttonCourbesDesTauxVariables"
+                android:title="@string/taux_variables" />
 
-        <item
-            android:id="@+id/buttonCourbesDesTauxFixes"
-            android:title="@string/taux_fixes" />
-    </group>
-
+            <item
+                android:id="@+id/buttonCourbesDesTauxFixes"
+                android:title="@string/taux_fixes" />
+        </menu>
+    </item>
 
     <item
         android:id="@+id/subMenuHistorique"
-        android:title="@string/historique_des_taux" />
-    <group
-        android:id="@+id/groupHistorique"
-        android:visible="false">
-        <item
-            android:id="@+id/buttonHistoriqueTauxVariables"
-            android:title="@string/taux_variables" />
+        android:title="@string/historique_des_taux">
+        <menu>
+            <item
+                android:id="@+id/buttonHistoriqueTauxVariables"
+                android:title="@string/taux_variables" />
 
-        <item
-            android:id="@+id/buttonHistoriqueTauxFixes"
-            android:title="@string/taux_fixes" />
-    </group>
-
+            <item
+                android:id="@+id/buttonHistoriqueTauxFixes"
+                android:title="@string/taux_fixes" />
+        </menu>
+    </item>
 
     <item
-        android:id="@+id/menuLicence"
-        android:title="@string/licence_et_code_source" />
+        android:id="@+id/buttonApropos"
+        android:title="@string/apropos">
+
+        <menu>
+            <item
+                android:id="@+id/buttonLicence"
+                android:title="@string/licence_et_code_source" />
+            <item
+                android:id="@+id/buttonSite"
+                android:title="@string/site_address" />
+        </menu>
+    </item>
 
 
 </menu>

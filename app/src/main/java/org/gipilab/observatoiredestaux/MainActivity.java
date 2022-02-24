@@ -1,62 +1,57 @@
 package org.gipilab.observatoiredestaux;
 
 /*
-* Observatoire des taux
-*
-* Copyright Thibault et Gilbert Mondary, Laboratoire de Recherche pour le Développement Local (2006--)
-*
-* labo@gipilab.org
-*
-* Ce logiciel est un programme informatique servant à visualiser différents indicateurs sur les taux
-* (historique, courbes des taux, pression conjoncturelle...)
-*
-*
-* Ce logiciel est régi par la licence CeCILL soumise au droit français et
-* respectant les principes de diffusion des logiciels libres. Vous pouvez
-* utiliser, modifier et/ou redistribuer ce programme sous les conditions
-* de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
-* sur le site "http://www.cecill.info".
-*
-* En contrepartie de l'accessibilité au code source et des droits de copie,
-* de modification et de redistribution accordés par cette licence, il n'est
-* offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
-* seule une responsabilité restreinte pèse sur l'auteur du programme, le
-* titulaire des droits patrimoniaux et les concédants successifs.
-*
-* A cet égard l'attention de l'utilisateur est attirée sur les risques
-* associés au chargement, à l'utilisation, à la modification et/ou au
-* développement et à la reproduction du logiciel par l'utilisateur étant
-* donné sa spécificité de logiciel libre, qui peut le rendre complexe à
-* manipuler et qui le réserve donc à des développeurs et des professionnels
-* avertis possédant des connaissances informatiques approfondies. Les
-* utilisateurs sont donc invités à charger et tester l'adéquation du
-* logiciel à leurs besoins dans des conditions permettant d'assurer la
-* sécurité de leurs systèmes et ou de leurs données et, plus généralement,
-* à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
-*
-* Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
-* pris connaissance de la licence CeCILL, et que vous en avez accepté les
-* termes.
-*
-*/
+ * Observatoire des taux
+ *
+ * Copyright Thibault et Gilbert Mondary, Laboratoire de Recherche pour le Développement Local (2006--)
+ *
+ * labo@gipilab.org
+ *
+ * Ce logiciel est un programme informatique servant à visualiser différents indicateurs sur les taux
+ * (historique, courbes des taux, pression conjoncturelle...)
+ *
+ *
+ * Ce logiciel est régi par la licence CeCILL soumise au droit français et
+ * respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et l'INRIA
+ * sur le site "http://www.cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * A cet égard l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et ou de leurs données et, plus généralement,
+ * à l'utiliser et l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL, et que vous en avez accepté les
+ * termes.
+ *
+ */
 
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import androidx.annotation.NonNull;
-import com.google.android.material.navigation.NavigationView;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
@@ -68,6 +63,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
@@ -81,30 +84,12 @@ public class MainActivity extends AppCompatActivity
     private ProgressBar progress = null;
     private SharedPreferences mSettings = null;
 
-    private boolean groupeCourbesVisible = false;
-    private boolean groupeHistoriqueVisible = false;
-    private boolean groupePressionVisible = false;
-    private boolean groupeVolatiliteVisible = false;
-
-
-
     @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
         progress = findViewById(R.id.progressBar);
-
-
-        //DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        /*ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        //noinspection deprecation
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();*/
-
 
         mSettings = PreferenceManager.getDefaultSharedPreferences(this);
 
@@ -183,135 +168,44 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         WebView webView = findViewById(R.id.webView);
-        boolean close = true;
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        Menu menu = navigationView.getMenu();
-
-
-        switch (id) {
-            case R.id.buttonCourbesDesTauxVariables:
-
-                myBrowser.myLoadUrl(webView, UrlTable.URLCOURBESTAUXVARIABLES);
-                break;
-
-            case R.id.buttonCourbesDesTauxFixes:
-
-                myBrowser.myLoadUrl(webView, UrlTable.URLCOURBESTAUXFIXES);
-                break;
-
-            case R.id.buttonHistoriqueTauxVariables:
-                myBrowser.myLoadUrl(webView, UrlTable.URLHISTORIQUETAUXVARIABLES);
-                break;
-
-            case R.id.buttonHistoriqueTauxFixes:
-                myBrowser.myLoadUrl(webView, UrlTable.URLHISTORIQUETAUXFIXES);
-                break;
-
-            case R.id.buttonPressionConjoncturelleTauxVariables:
-                myBrowser.myLoadUrl(webView, UrlTable.URLPRESSIONCONJONCTURELLETAUXVARIABLES);
-                break;
-
-            case R.id.buttonPressionConjoncturelleTauxFixes:
-                myBrowser.myLoadUrl(webView, UrlTable.URLPRESSIONCONJONCTURELLETAUXFIXES);
-                break;
-
-            case R.id.buttonJauges:
-                myBrowser.myLoadUrl(webView, UrlTable.URLJAUGES);
-                break;
-
-            case R.id.buttonVolatiliteTauxVariables:
-                myBrowser.myLoadUrl(webView, UrlTable.URLVOLATILITETAUXVARIABLES);
-                break;
-
-            case R.id.buttonVolatiliteTauxFixes:
-                myBrowser.myLoadUrl(webView, UrlTable.URLVOLATILITETAUXFIXES);
-                break;
-
-            case R.id.buttonGFM:
-                myBrowser.myLoadUrl(webView, UrlTable.URLTHEORIEGFM);
-                break;
-
-            case R.id.buttonPresentation:
-                myBrowser.myLoadUrl(webView, UrlTable.URLPRESENTATION);
-                break;
-
-            case R.id.subMenuCourbesDesTaux:
-                if (groupeCourbesVisible) {
-                    menu.setGroupVisible(R.id.groupCourbesDesTaux, false);
-                } else {
-                    menu.setGroupVisible(R.id.groupCourbesDesTaux, true);
-                }
-                groupeCourbesVisible = !groupeCourbesVisible;
-                groupeHistoriqueVisible = false;
-                groupeVolatiliteVisible = false;
-                groupePressionVisible = false;
-                menu.setGroupVisible(R.id.groupHistorique, false);
-                menu.setGroupVisible(R.id.groupPression, false);
-                menu.setGroupVisible(R.id.groupVolatilite, false);
-                close = false;
-                break;
-
-            case R.id.subMenuHistorique:
-                if (groupeHistoriqueVisible) {
-                    menu.setGroupVisible(R.id.groupHistorique, false);
-                } else {
-                    menu.setGroupVisible(R.id.groupHistorique, true);
-                }
-                groupeHistoriqueVisible = !groupeHistoriqueVisible;
-                groupePressionVisible = false;
-                groupeCourbesVisible = false;
-                groupeVolatiliteVisible = false;
-                menu.setGroupVisible(R.id.groupCourbesDesTaux, false);
-                menu.setGroupVisible(R.id.groupPression, false);
-                menu.setGroupVisible(R.id.groupVolatilite, false);
-                close = false;
-                break;
-
-            case R.id.subMenuPressionConjoncturelle:
-                if (groupePressionVisible) {
-                    menu.setGroupVisible(R.id.groupPression, false);
-                } else {
-                    menu.setGroupVisible(R.id.groupPression, true);
-                }
-                groupePressionVisible = !groupePressionVisible;
-                groupeCourbesVisible = false;
-                groupeHistoriqueVisible = false;
-                groupeVolatiliteVisible = false;
-                menu.setGroupVisible(R.id.groupCourbesDesTaux, false);
-                menu.setGroupVisible(R.id.groupHistorique, false);
-                menu.setGroupVisible(R.id.groupVolatilite, false);
-                close = false;
-                break;
-
-            case R.id.subMenuVolatilite:
-                if (groupeVolatiliteVisible) {
-                    menu.setGroupVisible(R.id.groupVolatilite, false);
-                } else {
-                    menu.setGroupVisible(R.id.groupVolatilite, true);
-                }
-                groupeVolatiliteVisible = !groupeVolatiliteVisible;
-                groupeCourbesVisible = false;
-                groupeHistoriqueVisible = false;
-                groupePressionVisible = false;
-                menu.setGroupVisible(R.id.groupCourbesDesTaux, false);
-                menu.setGroupVisible(R.id.groupHistorique, false);
-                menu.setGroupVisible(R.id.groupPression, false);
-                close = false;
-                break;
-
-
-            case R.id.menuLicence:
-                webView.loadUrl("file:///android_asset/cecill_fr.html");
-                break;
-
+        if (id == R.id.buttonCourbesDesTauxVariables) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLCOURBESTAUXVARIABLES);
+        } else if (id == R.id.buttonCourbesDesTauxFixes) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLCOURBESTAUXFIXES);
+        } else if (id == R.id.buttonHistoriqueTauxVariables) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLHISTORIQUETAUXVARIABLES);
+        } else if (id == R.id.buttonHistoriqueTauxFixes) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLHISTORIQUETAUXFIXES);
+        } else if (id == R.id.buttonPressionConjoncturelleTauxVariables) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLPRESSIONCONJONCTURELLETAUXVARIABLES);
+        } else if (id == R.id.buttonPressionConjoncturelleTauxFixes) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLPRESSIONCONJONCTURELLETAUXFIXES);
+        } else if (id == R.id.buttonJauges) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLJAUGES);
+        } else if (id == R.id.buttonVolatiliteTauxVariables) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLVOLATILITETAUXVARIABLES);
+        } else if (id == R.id.buttonVolatiliteTauxFixes) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLVOLATILITETAUXFIXES);
+        } else if (id == R.id.buttonGFM) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLTHEORIEGFM);
+        } else if (id == R.id.buttonPresentation) {
+            myBrowser.myLoadUrl(webView, UrlTable.URLPRESENTATION);
+        } else if (id == R.id.buttonLicence) {
+            webView.loadUrl("file:///android_asset/cecill_fr.html");
+        } else if (id == R.id.buttonSite) {
+            String url = "https://gipilab.org";
+            Uri uri = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
         }
 
 
-        if (close) {
-            DrawerLayout drawer = findViewById(R.id.drawer_layout);
-            drawer.closeDrawer(GravityCompat.START);
-        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+
         return true;
     }
 
