@@ -209,8 +209,8 @@ if (!file_exists("$fileName")) {
 
 	<?php if ($pageCourante != 7 && $pageCourante != 12) { ?>
 
-		<script src="https://code.highcharts.com/stock/9.3/highstock.js"></script>
-		<script src="https://code.highcharts.com/stock/9.3/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/stock/10.1/highstock.js"></script>
+		<script src="https://code.highcharts.com/stock/10.1/highcharts-more.js"></script>
 
 		<script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 	<?php } ?>
