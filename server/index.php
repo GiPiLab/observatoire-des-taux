@@ -198,25 +198,35 @@ if (!file_exists("$fileName")) {
 			background: white;
 		}
 	</style>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 
 	<script src="libs/materialize/materialize.min.js"></script>
 
 	<?php if ($pageCourante == 7) { ?>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js" integrity="sha256-67By+NpOtm9ka1R6xpUefeGOY8kWWHHRAKlvaTJ7ONI=" crossorigin="anonymous"></script>
-		<script type="text/javascript" src="libs/justgage.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js" integrity="sha512-tBzZQxySO5q5lqwLWfu8Q+o4VkTcRGOeQGVQ0ueJga4A1RKuzmAu5HXDOXLEjpbKyV7ow9ympVoa6wZLEzRzDg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--1.4.3 is the last version that works on android 4.4-->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/justgage/1.4.3/justgage.min.js" integrity="sha512-WN9KBzngkVj1IygMFXRouU/sAtZoyzfGv+unE5WFGH143WRc6BBs5r9LkiQlA+XevrAb2AYhrhkA4huyc53PeQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
 	<?php } ?>
 
 	<?php if ($pageCourante != 7 && $pageCourante != 12) { ?>
 
-		<script src="https://code.highcharts.com/stock/10.1/highstock.js"></script>
-		<script src="https://code.highcharts.com/stock/10.1/highcharts-more.js"></script>
+		<script src="https://code.highcharts.com/stock/10.3/highstock.js"></script>
+		<script src="https://code.highcharts.com/stock/10.3/highcharts-more.js"></script>
 
 		<script type="text/javascript" src="progs/taux/js_thib_pour_taux.js"></script>
 	<?php } ?>
 
 	<?php if ($pageCourante == 8 || $pageCourante == 9) { ?>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.0.3/big.min.js" integrity="sha512-rxa46c1jksm8mFVGUHW8x01eLyyE7OJg5xUdLUavwC2Ltx8nnAjHoPE/C7r+q5bAxL0a1DGke/uTfzdB9aBBog==" crossorigin="anonymous"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/big.js/6.2.1/big.min.js" integrity="sha512-Qtgkv9WCaEgwA/mKJ4yEmjAF7Z5LzRiqo22iwCTCw1JSh/jXz69X465RugJb3/cmyS/V+9Jegfp376vi0SbkKQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 	<?php } ?>
 
 
