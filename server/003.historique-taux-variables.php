@@ -69,11 +69,6 @@
 						}
 					},
 
-					credits: {
-						enabled: true,
-						href: "",
-						text: "©2006-<?php echo date('Y'); ?> Laboratoire de Recherche pour le Développement Local"
-					},
 
 					legend: {
 						enabled: true
